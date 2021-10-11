@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+.big-font {
+  font-size: 140%;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.largePara {
+  font-size: 110%;
+}
+
+.verdana {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.yellow {
+  color: #fcc718;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  /* Webkit adds a small stroke outline to text to make it more readable. */
+}
+
+.formLabel {
+  font-size: 125%;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.borderInput {
+  border: 2px solid #999d9e;
+}
+
+.pwdRule {
+  font-size: 110%;
+  color: #ff0000;
+  font-weight: 500;
+}
+
+.bord {
+  border: 1px solid #000000;
+}
