@@ -5,7 +5,7 @@ const API_HOST = "http://localhost:4000";
 const USER_KEY = "user";
 
 async function verifyUser(email, password) {
-    const response = await axios.get(API_HOST + "/api/users/login", { params: { email, password } });
+    const response = await axios.get(API_HOST + "/api/users/signin", { params: { email, password } });
     const user = response.data;
 
     if (user !== null)

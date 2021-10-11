@@ -36,7 +36,7 @@ export default function App() {
         <Navbar user={user} signoutUser={signoutUser} />
         <Switch>
           <Route exact path="/"> {/* Route path for Home class */}
-            <Home />
+            <Home user={user} />
           </Route>
           <Route path="/signup"> {/* Route path for SignUp class */}
             <SignUp signinUser={signinUser} />
