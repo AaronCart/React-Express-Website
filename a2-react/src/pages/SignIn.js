@@ -1,80 +1,62 @@
-import React, { Component } from 'react';
-import { verifyUser } from '../data/repository';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { verifyUser } from "../data/repository";
 
-class SignIn extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            fields: {
-                email: "",
-                password: ""
-            },
-            errors: {}
-        };
-    }
+export default function SignIn(props) {
+    const history = useHistory();
+    const [fields, setFields] = useState({ email: "", password: "" });
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    handleInputChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        const fields = this.state.fields;
-        fields[name] = value;
-        this.setState({ fields });
-    }
+    // Generic input change handler
+    const handleInputChange = (event) => {
+        setFields({ ...fields, [event.target.name]: event.target.value });
+    };
 
-    handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Prevents page from reloading
-        const email = this.state.fields.email;
-        const verified = verifyUser(email, this.state.fields.password);
 
-        if (verified === true) {
-            this.props.signinUser(email);
+        const user = await verifyUser(fields.email, fields.password);
 
-            this.props.history.push("/profile");
+        if (user === null) {
+            // Login failed, reset password field to blank and set error message
+            setFields({ ...fields, password: "" });
+            setErrorMessage("Email and/or password invalid, please try again.");
             return;
         }
-        // If the user successfully signs in then they will be redirected to the profile page
 
-        const fields = this.state.fields;
-        fields.password = "";
-        // Clears password field when form is submitted
+        // Set user state
+        props.signinUser(user);
 
-        this.setState({
-            fields: fields,
-            errors: { "errorMessage": "Your email or password was incorrect, please try again" }
-        });
-    }
+        // Navigate to the profile page on successful Sign In
+        history.push("/profile");
+    };
 
-    render() {
-        return (
-            <div className="container">
-                <h1 className="text-center my-3"><b>Sign In Page</b></h1>
-                <h5 className="text-center">Don't have an account? <a href="/signup"><u>Click here to Sign Up!</u></a></h5>
-                <form className="mx-5 formLabel" onSubmit={this.handleSubmit}>
+    return (
+        <div className="container">
+            <h1 className="text-center my-3"><b>Sign In Page</b></h1>
+            <h5 className="text-center">Don't have an account? <a href="/signup"><u>Click here to Sign Up!</u></a></h5>
+            <form className="mx-5 formLabel" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="email">Email:</label>
+                    <input type="text" name="email" className="form-control borderInput" id="email"
+                        value={fields.email} onChange={handleInputChange} placeholder="Enter Email"
+                        required></input>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" name="password" className="form-control borderInput" id="password"
+                        value={fields.password} onChange={handleInputChange}
+                        placeholder="Enter Password" required></input>
+                </div>
+                {errorMessage !== null &&
                     <div className="form-group">
-                        <label htmlFor="email">Email:</label>
-                        <input type="text" name="email" className="form-control borderInput" id="email"
-                            value={this.state.fields.email} onChange={this.handleInputChange} placeholder="Enter Email"
-                            required></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" name="password" className="form-control borderInput" id="password"
-                            value={this.state.fields.password} onChange={this.handleInputChange}
-                            placeholder="Enter Password" required></input>
-                    </div>
-                    {this.state.errors["errorMessage"] &&
-                        <div className="form-group">
-                            <span className="text-danger">{this.state.errors["errorMessage"]}</span>
-                            {/* If the user uses the wrong email or password then the error message will 
+                        <span className="text-danger">{errorMessage}</span>
+                        {/* If the user uses the wrong email or password then the error message will 
                             show up and the form will not be submitted */}
-                        </div>
-                    }
-                    <button type="submit" className="btn btn-primary btn-lg mt-2 mb-5">Sign In</button>
-                </form>
-            </div>
-        );
-    }
+                    </div>
+                }
+                <button type="submit" className="btn btn-primary btn-lg mt-2 mb-5">Sign In</button>
+            </form>
+        </div>
+    );
 }
-
-export default SignIn
