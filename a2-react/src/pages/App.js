@@ -5,14 +5,14 @@ import {
   Switch,
 } from "react-router-dom";
 import './App.css';
-import Navbar from './pages/Navbar';
-import Footer from './pages/Footer';
-import Home from './pages/Home';
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
-import Header from './pages/Header';
-import MyProfile from './pages/MyProfile';
-import Posting from './pages/Posting';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Home from './Home';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import Header from './Header';
+import MyProfile from './MyProfile';
+import Posting from './Posting';
 import { getUser, removeUser } from "../data/repository";
 
 export default function App() {

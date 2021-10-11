@@ -27,7 +27,7 @@ export default function SignIn(props) {
         // Set user state
         props.signinUser(user);
 
-        // Navigate to the profile page on successful Sign In
+        // Navigate to the profile page so that the user is signed in after signing up
         history.push("/profile");
     };
 
