@@ -1,39 +1,61 @@
-const USERS_KEY = "users";
+import axios from "axios";
 
-function checkUsers() {
-    if (localStorage.getItem(USERS_KEY) !== null)
-        return;
+// Constants
+const API_HOST = "http://localhost:4000";
+const USER_KEY = "user";
 
-    const users = [
-        {
-            name1: "Test Name",
-            email: "hello@gmail.com",
-            password: "Java123!"
-        }
-    ];
+async function verifyUser(email, password) {
+    const response = await axios.get(API_HOST + "/api/users/login", { params: { email, password } });
+    const user = response.data;
 
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    // NOTE: In this example the login is also persistent as it is stored in local storage.
+    if (user !== null)
+        setUser(user);
+
+    return user;
 }
-// Simple test function to see if user input is stored in localStorage correctly
 
-function getUsers() {
-    checkUsers();
-    const data = localStorage.getItem(USERS_KEY);
-    return JSON.parse(data);
+// User Requests
+async function findUser(id) {
+    const response = await axios.get(API_HOST + `/api/users/select/${id}`);
+
+    return response.data;
 }
-// Access data from local storage
 
-function verifyUser(email, password) {
-    const users = getUsers();
+async function createUser(user) {
+    const response = await axios.post(API_HOST + "/api/users", user);
 
-    if (email === users.email && password === users.password) {
-        return true;
-    } else {
-        return false;
-    }
+    return response.data;
+}
+
+// Posts Requests
+async function getPosts() {
+    const response = await axios.get(API_HOST + "/api/posts");
+
+    return response.data;
+}
+
+async function createPost(post) {
+    const response = await axios.post(API_HOST + "/api/posts", post);
+
+    return response.data;
+}
+
+// Used to remember if user is logged in
+function setUser(user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+}
+
+function getUser() {
+    return JSON.parse(localStorage.getItem(USER_KEY));
+}
+
+function removeUser() {
+    localStorage.removeItem(USER_KEY);
 }
 
 export {
-    verifyUser,
-    getUsers
+    verifyUser, findUser, createUser,
+    getPosts, createPost,
+    getUser, removeUser
 }
