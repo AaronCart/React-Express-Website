@@ -1,33 +1,50 @@
-import React, { useState } from 'react';
-import { getUsers } from "../data/repository";
+import React, { useState, useEffect } from "react";
+import { getPosts, createPost } from "../data/repository";
 
-function Posting(props) {
+export default function Posting(props) {
     const [post, setPost] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [posts, setPosts] = useState([]);
-    const [username, setUsername] = useState({currentUser: getUsers()});
 
-    const handleInputChange = (e) => {
-        setPost(e.target.value);
-    }
+    // Load posts.
+    useEffect(() => {
+        async function loadPosts() {
+            const currentPosts = await getPosts();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Prevents the page from reloading on submit
-        const postTrimmed = post.trim();
+            setPosts(currentPosts);
+            setIsLoading(false);
+        }
 
-        if (postTrimmed === "") {
-            setErrorMessage("Your post cannot be empty");
+        loadPosts();
+    }, []);
+
+    const handleInputChange = (event) => {
+        setPost(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        // Trim the post text.
+        const trimmedPost = post.trim();
+
+        if (trimmedPost === "") {
+            setErrorMessage("A post cannot be empty.");
             return;
         }
 
-        // Create Post with user's email
-        setPosts([...posts, { email: props.email, text: postTrimmed }]);
+        // Create post.
+        const newPost = { text: trimmedPost, email: props.user.email };
+        await createPost(newPost);
 
-        // Resets posts to empty strings
+        // Add post to locally stored posts.
+        setPosts([...posts, newPost]);
+
+        // Reset post content.
         setPost("");
         setErrorMessage("");
-    }
+    };
 
     return (
         <React.Fragment>
@@ -63,9 +80,9 @@ function Posting(props) {
                             <span className="text-muted mx-5">No posts have been submitted yet.</span>
                             :
                             posts.map((p) =>
-                            // p is just short for posts
+                                // p is just short for posts
                                 <div className="border my-3 p-3 mx-5" style={{ whiteSpace: "pre-wrap" }}>
-                                    <h4 className="text-success">{username.currentUser.name1}</h4>
+                                    <h4 className="text-success">{props.user.name1}</h4>
                                     {p.text}
                                 </div>
                             )
@@ -76,5 +93,3 @@ function Posting(props) {
         // React Fragment used to display Posting Page information as well the actual Post Form
     );
 }
-
-export default Posting
