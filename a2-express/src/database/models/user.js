@@ -1,3 +1,5 @@
+const { Sequelize } = require("sequelize/types");
+
 module.exports = (sequelize, DataTypes) =>
   sequelize.define("user", {
     username: {
@@ -15,8 +17,9 @@ module.exports = (sequelize, DataTypes) =>
     last_name: {
       type: DataTypes.STRING(40),
       allowNull: false
-    }
-  }, {
-    // Don't add the timestamp attributes (updatedAt, createdAt).
-    timestamps: false
+    },
+    
+    // Get rid of createdAt and updatedAt if the DATEONLY format doesn't work
+    createdAt: Sequelize.DATEONLY,
+    updatedAt: Sequelize.DATEONLY
   });
