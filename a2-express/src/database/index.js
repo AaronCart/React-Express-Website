@@ -25,9 +25,6 @@ db.sync = async () => {
   // Sync schema.
   await db.sequelize.sync();
 
-  // Can sync with force if the schema has become out of date - note that syncing with force is a destructive operation.
-  // await db.sequelize.sync({ force: true });
-
   await seedData();
 };
 
@@ -38,13 +35,15 @@ async function seedData() {
   if (count > 0)
     return;
 
+  // Used argon2 hashing algorithm 
   const argon2 = require("argon2");
 
+  // Example test users
   let hash = await argon2.hash("Hello123!", { type: argon2.argon2id });
-  await db.user.create({ email: "testemail@gmail.com", password_hash: hash, name1: "Sam" });
+  await db.user.create({ email: "testemail@gmail.com", password_hash: hash, fName: "Sam" });
 
   hash = await argon2.hash("React456!", { type: argon2.argon2id });
-  await db.user.create({ email: "hello@gmail.com", password_hash: hash, name1: "Jim" });
+  await db.user.create({ email: "hello@gmail.com", password_hash: hash, fName: "Jim" });
 }
 
 module.exports = db;
