@@ -21,7 +21,7 @@ db.post.belongsTo(db.user, { foreignKey: { name: "email", allowNull: false } });
 
 // Include a sync option with seed data logic included
 db.sync = async () => {
-  // Sync schema.
+  // Sync schema
   await db.sequelize.sync();
 
   await seedData();
