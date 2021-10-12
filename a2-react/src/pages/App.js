@@ -13,6 +13,7 @@ import SignIn from './SignIn';
 import Header from './Header';
 import MyProfile from './MyProfile';
 import Posting from './Posting';
+import EditProfile from "./EditProfile";
 import { getUser, removeUser } from "../data/repository";
 
 export default function App() {
@@ -46,6 +47,9 @@ export default function App() {
           </Route>
           <Route path="/profile"> {/* Route Path for My Profile class */}
             <MyProfile user={user} />
+          </Route>
+          <Route path="/edit/:email">
+            <EditProfile />
           </Route>
           <Route path="/posts">
             <Posting user={user} />

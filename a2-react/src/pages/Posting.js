@@ -70,7 +70,7 @@ export default function Posting(props) {
                         <label htmlFor="post">New Post (Maximum Length: 600 characters)</label>
                         <textarea className="form-control" id="post" name="post" maxlength="600" rows="4"
                             placeholder="Share your thoughts..." value={post} onChange={handleInputChange}></textarea>
-                        <h5 className="mt-2">{count}/600</h5>
+                        <h6 className="mt-2 text-danger">{count}/600</h6>
                     </div>
                     {errorMessage !== null &&
                         <div className="form-group">
