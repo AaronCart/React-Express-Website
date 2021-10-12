@@ -14,9 +14,15 @@ async function verifyUser(email, password) {
     return user;
 }
 
-// Find a specific user for sign up so that an email can only be registered once
+// Find the specific user for sign up and editing
 async function findUser(email) {
     const response = await axios.get(API_HOST + `/api/users/select/${email}`);
+
+    return response.data;
+}
+
+async function findUsers() {
+    const response = await axios.get(API_HOST + "/api/users");
 
     return response.data;
 }
@@ -66,7 +72,7 @@ function removeUser() {
 export {
     verifyUser, findUser, createUser,
     updateUser, getPosts, createPost,
-    getUser, removeUser
+    getUser, removeUser, findUsers
 }
 
 // Code sourced from week 8 and 9 tutorial

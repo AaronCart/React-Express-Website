@@ -1,8 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { findUser, updateUser } from "../data/repository";
-import profilePic from "./profile.png";
-// Image Source: https://www.pngitem.com/middle/iTxxxxm_blank-profile-picture-circle-hd-png-download/
 
 export default function EditProfile() {
     const [profile, setProfile] = useState(null);
@@ -92,19 +90,26 @@ export default function EditProfile() {
     };
 
     return (
-        <div>
-            <div className="row">
-                <div className="col-12 col-md-3 bg-secondary">
-                    <div className="text-center mt-2">
-                        <img src={profilePic} alt="Blank Profile Pic.png" width="5%" height="auto" />
-                    </div>
-                    <h5>{profile.fName}</h5>
-                    <h6 className="text-muted">{profile.email}</h6>
+        <div className="container bg-light mt-4">
+            <form onSubmit={handleSubmit} className="mx-5">
+                <h2 className="text-success">Personal Details</h2>
+                <div className="form-group formLabel">
+                    <label htmlFor="fName">Name</label>
+                    <input name="fName" id="fName" className="form-control borderInput"
+                        value={fields.fName} onChange={handleInputChange} placeholder="Enter Name" />
+                    {errors.fName && <div className="text-danger">{errors.fName}</div>}
                 </div>
-            </div>
+                <div className="form-group formLabel">
+                    <label htmlFor="email">Email (Can Not Be Changed)</label>
+                    <input name="email" id="email" readOnly className="form-control borderInput"
+                        value={fields.email} />
+                </div>
+                <div className="form-group">
+                    <Link className="btn btn-danger btn-lg mr-5 mb-5" to="/profile">Cancel</Link>
+                    <button type="submit" className="btn btn-primary btn-lg mb-5">Update</button>
+                </div>
+            </form>
+            <p>{profile.fName}</p>
         </div>
     );
-
-
-
 }

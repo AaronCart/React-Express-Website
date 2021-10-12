@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
+
     return (
         <nav className="navbar navbar-expand-sm bg-info navbar-dark">
             <ul className="navbar-nav big-font mr-auto mx-5 pl-5">
