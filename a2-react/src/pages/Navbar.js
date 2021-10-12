@@ -36,7 +36,7 @@ export default function Navbar(props) {
                     // If the user is signed in then they will see a success message and a "Sign Out" link
                     <React.Fragment>
                         <li className="nav-item">
-                            <span className="nav-link text-light bg-info"><u>You are now logged in!</u></span>
+                            <span className="nav-link text-light bg-info">Signed in as: <u>{props.user.fName}</u></span>
                         </li>
                         <li className="nav-item mx-5 pr-5">
                             <Link className="nav-link text-light bg-info" to="/signin" onClick={props.signoutUser}>Sign Out</Link>

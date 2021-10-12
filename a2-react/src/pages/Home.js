@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import background from './background.png';
+import { Link } from "react-router-dom";
 // Image Source: https://unsplash.com/photos/SYTO3xs06fU
 
 export default function Home(props) {
@@ -18,10 +19,11 @@ export default function Home(props) {
 
                     {props.user === null ?
                         // If a user is not logged in, then this link will direct them to the Sign Up Page
-                        <p className="largePara">Well simply <a href="/signup"><u>click here</u></a> to get started today!</p>
+                        
+                        <p className="largePara">Well simply <Link to="/signup"><u>click here</u></Link> to get started today!</p>
                         :
                         // If a user is logged in, then this link will direct them to their Profile Page
-                        <p className="largePara">Well simply <a href="/profile"><u>click here</u></a> to get started today!</p>
+                        <p className="largePara">Well simply <Link to="/profile"><u>click here</u></Link> to get started today!</p>
                     }
                 </div>
                 <div className="col-sm">

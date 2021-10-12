@@ -7,7 +7,10 @@ export default function Posting(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [posts, setPosts] = useState([]);
 
-    // Load posts.
+    // Counter used for the number of characters in a post
+    const [count, setCount] = useState(0);
+
+    // Load posts
     useEffect(() => {
         async function loadPosts() {
             const currentPosts = await getPosts();
@@ -21,6 +24,8 @@ export default function Posting(props) {
 
     const handleInputChange = (event) => {
         setPost(event.target.value);
+        // Update count state atfer every new character is typed out
+        setCount(event.target.value.length)
     };
 
     const handleSubmit = async (event) => {
@@ -38,27 +43,34 @@ export default function Posting(props) {
         const newPost = { text: trimmedPost, email: props.user.email };
         await createPost(newPost);
 
-        // Add post to locally stored posts.
+        // Add post to locally stored posts
         setPosts([...posts, newPost]);
 
-        // Reset post content.
+        // Reset post content
         setPost("");
         setErrorMessage("");
+        setCount(0);
+        alert("Your Post has been submitted down below");
     };
+
+
 
     return (
         <React.Fragment>
+            <script>
+            </script>
             <div className="container text-center verdana mb-3">
                 <h1 className="my-3">Posting Page</h1>
                 <p className="largePara">Welcome to the Posting Page.<br />Here you can make posts
                     to other students or see what other students have been posting about.</p>
             </div>
-            <div className="container mb-5">
+            <div className="container mb-5 mt-4">
                 <form className="mx-5 formLabel" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="post">New Post</label>
-                        <textarea className="form-control" id="post" name="post" rows="4"
+                        <label htmlFor="post">New Post (Maximum Length: 600 characters)</label>
+                        <textarea className="form-control" id="post" name="post" maxlength="600" rows="4"
                             placeholder="Share your thoughts..." value={post} onChange={handleInputChange}></textarea>
+                        <h5 className="mt-2">{count}/600</h5>
                     </div>
                     {errorMessage !== null &&
                         <div className="form-group">
@@ -66,9 +78,9 @@ export default function Posting(props) {
                         </div>
                     }
                     <div className="form-group mb-4">
-                        <input type="button" className="btn btn-danger btn-lg mr-4" value="Cancel"
-                            onClick={() => { setPost(""); setErrorMessage(null); }} />
-                        <input type="submit" className="btn btn-primary btn-lg" value="Post" />
+                        <input type="submit" className="btn btn-primary btn-lg  mr-4" value="Post" />
+                        <input type="button" className="btn btn-danger btn-lg" value="Cancel"
+                            onClick={() => { setPost(""); setErrorMessage(null); setCount(0); }} />
                     </div>
                 </form>
 
