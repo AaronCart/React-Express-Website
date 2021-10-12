@@ -14,10 +14,11 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 // Include models
 db.user = require("./models/user.js")(db.sequelize, DataTypes);
 db.post = require("./models/post.js")(db.sequelize, DataTypes);
+// db.user_post = require("./models/user_post")(db.sequelize, DataTypes);
 
 // Relate post and user
 db.post.belongsTo(db.user, { foreignKey: { name: "email", allowNull: false } });
-
+// db.post.belongsTo(db.user, { through: db.user_post, as: "users", foreignKey: { name: "email", allowNull: false } });
 
 // Include a sync option with seed data logic included
 db.sync = async () => {
@@ -37,12 +38,27 @@ async function seedData() {
   // Used argon2 hashing algorithm 
   const argon2 = require("argon2");
 
-  // Example test users
+  // Create Example test users
   let hash = await argon2.hash("Hello123!", { type: argon2.argon2id });
   await db.user.create({ email: "testemail@gmail.com", password_hash: hash, fName: "Sam" });
 
   hash = await argon2.hash("React456!", { type: argon2.argon2id });
   await db.user.create({ email: "hello@gmail.com", password_hash: hash, fName: "Jim" });
+
+  // const posts = await db.post.bulkCreate([
+  //   { text: "Hello Test from Sequelize" },
+  //   { text: "2nd test from sequelize" }
+  // ]);
+
+  // const postIDs = posts.map(i => i.dataValues.post_id);
+  // const firstID = postIDs[0];
+  // const secondID = postIDs[1];
+
+  // db.user_post.bulkCreate([
+  //   { email: "testemail@gmail.com", post_id: firstID },
+  //   { email: "hello@gmail.com", post_id: secondID }
+  // ])
+
 }
 
 module.exports = db;

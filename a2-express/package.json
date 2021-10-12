@@ -4,7 +4,9 @@
   "description": "Node.js Rest Apis with Express, Sequelize & Cloud MySQL",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "start-with-node": "node server.js"
   },
   "author": "Aaron Cartledge",
   "license": "ISC",
@@ -13,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2": "^2.3.0",
+    "nodemon": "^2.0.13",
     "sequelize": "^6.7.0"
   }
 }
