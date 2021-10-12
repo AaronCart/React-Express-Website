@@ -7,7 +7,7 @@ export default function Posting(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [posts, setPosts] = useState([]);
 
-    // Counter used for the number of characters in a post
+    // Counter used to display the number of characters in a post
     const [count, setCount] = useState(0);
 
     // Load posts
@@ -31,7 +31,7 @@ export default function Posting(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Trim the post text.
+        // Trim the post text
         const trimmedPost = post.trim();
 
         if (trimmedPost === "") {
@@ -39,21 +39,21 @@ export default function Posting(props) {
             return;
         }
 
-        // Create post.
+        // Create post
         const newPost = { text: trimmedPost, email: props.user.email };
         await createPost(newPost);
 
         // Add post to locally stored posts
         setPosts([...posts, newPost]);
 
-        // Reset post content
+        // Reset post content and counter
         setPost("");
         setErrorMessage("");
         setCount(0);
+
+        // Display alert when post is submitted
         alert("Your Post has been submitted down below");
     };
-
-
 
     return (
         <React.Fragment>

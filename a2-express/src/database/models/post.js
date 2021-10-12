@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) =>
       primaryKey: true
     },
     text: {
-      // Sets the maximum length for a post (600 characters)
+      // Sets the maximum length for a post (600 characters) as required in spec sheet
       type: DataTypes.STRING(600),
       allowNull: false
     }

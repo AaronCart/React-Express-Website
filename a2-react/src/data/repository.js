@@ -58,3 +58,5 @@ export {
     getPosts, createPost,
     getUser, removeUser
 }
+
+// Code sourced from week 8 tutorial

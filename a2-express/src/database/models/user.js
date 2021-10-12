@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) =>
       type: DataTypes.STRING(96),
       allowNull: false
     },
-    // Short for Full Name
+
+    // fname is just short for Full Name
     fName: {
       type: DataTypes.STRING(40),
       allowNull: false

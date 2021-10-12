@@ -5,22 +5,21 @@ const db = {
   Op: Sequelize.Op
 };
 
-// Create Sequelize.
+// Create Sequelize
 db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: config.HOST,
   dialect: config.DIALECT
 });
 
-// Include models.
+// Include models
 db.user = require("./models/user.js")(db.sequelize, DataTypes);
 db.post = require("./models/post.js")(db.sequelize, DataTypes);
 
-// Relate post and user.
+// Relate post and user
 db.post.belongsTo(db.user, { foreignKey: { name: "email", allowNull: false } });
 
-// Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
-// Include a sync option with seed data logic included.
+// Include a sync option with seed data logic included
 db.sync = async () => {
   // Sync schema.
   await db.sequelize.sync();
@@ -31,7 +30,7 @@ db.sync = async () => {
 async function seedData() {
   const count = await db.user.count();
 
-  // Only seed data if necessary.
+  // Only seed data if necessary
   if (count > 0)
     return;
 
@@ -47,3 +46,5 @@ async function seedData() {
 }
 
 module.exports = db;
+
+// Code sourced from week 8 tutorial

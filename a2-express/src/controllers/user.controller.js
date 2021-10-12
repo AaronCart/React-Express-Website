@@ -40,3 +40,5 @@ exports.create = async (req, res) => {
 
   res.json(user);
 };
+
+// Code sourced from week 8 tutorial
