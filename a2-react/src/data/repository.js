@@ -14,26 +14,35 @@ async function verifyUser(email, password) {
     return user;
 }
 
-// User Requests
-async function findUser(id) {
-    const response = await axios.get(API_HOST + `/api/users/select/${id}`);
+// Find a specific user for sign up so that an email can only be registered once
+async function findUser(email) {
+    const response = await axios.get(API_HOST + `/api/users/select/${email}`);
 
     return response.data;
 }
 
+// Create user when sign up is successful
 async function createUser(user) {
     const response = await axios.post(API_HOST + "/api/users", user);
 
     return response.data;
 }
 
-// Posts Requests
+// Edit User information
+async function updateUser(user) {
+    const response = await axios.put(API_HOST + "/api/users", user);
+
+    return response.data;
+}
+
+// Load posts from database when on Posts Page
 async function getPosts() {
     const response = await axios.get(API_HOST + "/api/posts");
 
     return response.data;
 }
 
+// Add new posts to database
 async function createPost(post) {
     const response = await axios.post(API_HOST + "/api/posts", post);
 
@@ -49,14 +58,15 @@ function getUser() {
     return JSON.parse(localStorage.getItem(USER_KEY));
 }
 
+// Used when signing out
 function removeUser() {
     localStorage.removeItem(USER_KEY);
 }
 
 export {
     verifyUser, findUser, createUser,
-    getPosts, createPost,
+    updateUser, getPosts, createPost,
     getUser, removeUser
 }
 
-// Code sourced from week 8 tutorial
+// Code sourced from week 8 and 9 tutorial
