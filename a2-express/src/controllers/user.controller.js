@@ -10,7 +10,7 @@ exports.all = async (req, res) => {
 
 // Select one user from the database
 exports.one = async (req, res) => {
-  const user = await db.user.findByPk(req.params.id);
+  const user = await db.user.findByPk(req.params.email);
 
   res.json(user);
 };
@@ -35,10 +35,22 @@ exports.create = async (req, res) => {
   const user = await db.user.create({
     email: req.body.email,
     password_hash: hash,
-    fName: req.body.name1
+    fName: req.body.fName
   });
 
   res.json(user);
 };
 
-// Code sourced from week 8 tutorial
+// Update a user in the database
+exports.update = async (req, res) => {
+  const user = await db.user.findByPk(req.body.email);
+
+  // Update user field for Name as there aren't any other fields to update
+  user.fName = req.body.fName;
+
+  await user.save();
+
+  res.json(user);
+}
+
+// Code sourced from week 8 & 9 tutorial

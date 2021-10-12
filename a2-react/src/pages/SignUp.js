@@ -7,7 +7,7 @@ export default function SignUp(props) {
 
     // Initial State for name, email and password
     const [fields, setFields] = useState({
-        name1: "", email: "", password: "", confirmPassword: ""
+        fName: "", email: "", password: "", confirmPassword: ""
     });
     const [errors, setErrors] = useState({});
 
@@ -69,9 +69,9 @@ export default function SignUp(props) {
 
             <form className="mx-5" onSubmit={handleSubmit}>
                 <div className="form-group formLabel">
-                    <label htmlFor="name1">Name:</label>
-                    <input type="text" name="name1" className="form-control borderInput"
-                        value={fields.name1} onChange={handleInputChange} id="name1"
+                    <label htmlFor="fName">Name:</label>
+                    <input type="text" name="fName" className="form-control borderInput"
+                        value={fields.fName} onChange={handleInputChange} id="fName"
                         placeholder="Enter Name" required></input>
                 </div>
                 <div className="form-group formLabel">
