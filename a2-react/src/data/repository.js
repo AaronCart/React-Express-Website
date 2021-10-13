@@ -72,7 +72,7 @@ function removeUser() {
 export {
     verifyUser, findUser, createUser,
     updateUser, getPosts, createPost,
-    getUser, removeUser, findUsers
+    getUser, removeUser, findUsers, setUser
 }
 
 // Code sourced from week 8 and 9 tutorial

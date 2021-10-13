@@ -14,6 +14,7 @@ module.exports = (express, app) => {
   // Create a new user
   router.post("/", controller.create);
 
+  // Update a user's details
   router.put("/", controller.update);
 
   // Add routes to server to reduce duplication

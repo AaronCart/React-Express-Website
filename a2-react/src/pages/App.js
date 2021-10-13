@@ -24,6 +24,10 @@ export default function App() {
     setUser(user);
   };
 
+  const updateUser = (user) => {
+    setUser(user);
+  };
+
   // Reset state when user signs out
   const signoutUser = () => {
     removeUser();
@@ -49,7 +53,7 @@ export default function App() {
             <MyProfile user={user} />
           </Route>
           <Route path="/edit/:email">
-            <EditProfile />
+            <EditProfile updateUser={updateUser} />
           </Route>
           <Route path="/posts">
             <Posting user={user} />
