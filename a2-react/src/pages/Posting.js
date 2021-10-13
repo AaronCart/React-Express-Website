@@ -57,10 +57,8 @@ export default function Posting(props) {
 
     return (
         <React.Fragment>
-            <script>
-            </script>
             <div className="container text-center verdana mb-3">
-                <h1 className="my-3">Posting Page</h1>
+                <h1 className="my-3 text-primary"><b>Posting Page</b></h1>
                 <p className="largePara">Welcome to the Posting Page.<br />Here you can make posts
                     to other students or see what other students have been posting about.</p>
             </div>
@@ -78,7 +76,7 @@ export default function Posting(props) {
                         </div>
                     }
                     <div className="form-group mb-4">
-                        <input type="submit" className="btn btn-primary btn-lg  mr-4" value="Post" />
+                        <input type="submit" className="btn btn-primary btn-lg mr-4" value="Post" />
                         <input type="button" className="btn btn-danger btn-lg" value="Cancel"
                             onClick={() => { setPost(""); setErrorMessage(null); setCount(0); }} />
                     </div>

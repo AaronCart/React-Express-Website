@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { findUser, updateUser, setUser } from "../data/repository";
 
+// Basic backend code sourced from week 9 tutorial
+
 export default function EditProfile(props) {
     const [profile, setProfile] = useState(null);
     const [fields, setFields] = useState(null);
@@ -44,7 +46,8 @@ export default function EditProfile(props) {
 
         const profile = await updateUser(trimmedFields);
 
-        // Update user information in navbar and profile page
+        // Update user information in navbar and profile page as well as localstorage
+        setUser(profile);
         props.updateUser(profile);
 
 
@@ -98,10 +101,10 @@ export default function EditProfile(props) {
         <div className="container-fluid">
             <div className="container pt-4">
                 <form onSubmit={handleSubmit} className="mx-5">
-                    <h2 className="text-success">Personal Details</h2>
+                    <h1 className="text-primary text-center mb-3"><b>Edit Profile</b></h1>
                     <div className="form-group formLabel">
                         <label htmlFor="fName">Name</label>
-                        <input name="fName" id="fName" className="form-control borderInput"
+                        <input name="fName" id="fName" className="form-control borderInput" maxlength="40"
                             value={fields.fName} onChange={handleInputChange} placeholder="Enter Name" />
                         {errors.fName && <div className="text-danger">{errors.fName}</div>}
                     </div>
@@ -110,9 +113,9 @@ export default function EditProfile(props) {
                         <input name="email" id="email" readOnly className="form-control borderInput"
                             value={fields.email} />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group verdana">
                         <Link className="btn btn-danger btn-lg mr-5 mb-5" to="/profile">Cancel</Link>
-                        <button type="submit" className="btn btn-primary btn-lg mb-5">Update</button>
+                        <button type="submit" className="btn btn-success btn-lg mb-5">Update</button>
                     </div>
                 </form>
             </div>

@@ -71,13 +71,13 @@ export default function SignUp(props) {
                 <div className="form-group formLabel">
                     <label htmlFor="fName">Name:</label>
                     <input type="text" name="fName" className="form-control borderInput"
-                        value={fields.fName} onChange={handleInputChange} id="fName"
+                        value={fields.fName} onChange={handleInputChange} id="fName" maxlength="40"
                         placeholder="Enter Name" required></input>
                 </div>
                 <div className="form-group formLabel">
                     <label htmlFor="email">Email:</label>
                     <input type="text" name="email" className="form-control borderInput"
-                        value={fields.email} onChange={handleInputChange} id="email"
+                        value={fields.email} onChange={handleInputChange} id="email" maxlength="50"
                         placeholder="Enter Email" pattern="\S+@\S+\.\S+"
                         // Regex for email from Week 4 lab code archive
                         title="Please enter a valid email address"
@@ -107,7 +107,7 @@ export default function SignUp(props) {
                 </div>
                 <p><span className="pwdRule">Password Rules:</span><br />Must be at least 6 characters long<br />Must contain at least 1 number
                     and 1 special character<br />Must contain at least 1 uppercase and 1 lowercase character</p>
-                <button type="submit" className="btn btn-primary btn-lg mb-5">Sign Up</button>
+                <button type="submit" className="btn btn-primary btn-lg mb-5 verdana">Sign Up</button>
             </form>
         </div>
     );
