@@ -11,6 +11,7 @@ export default function EditProfile(props) {
     const history = useHistory();
     const { email } = useParams();
 
+    // Loads the profile information of the currently signed in User
     useEffect(() => {
         async function loadProfile() {
             const currentProfile = await findUser(email);
@@ -50,11 +51,7 @@ export default function EditProfile(props) {
         setUser(profile);
         props.updateUser(profile);
 
-
-        // setMessage(<><strong>{profile.fName}</strong> profile has been successfully updated!</>);
-
-
-        // Navigate back to MyProfile Page
+        // Navigate back to My Profile Page upon successful Update
         history.push("/profile");
     };
 
@@ -62,6 +59,7 @@ export default function EditProfile(props) {
         const trimmedFields = trimFieldsEmptyToNull();
         const currentErrors = {};
 
+        // Sets error messages if a user does not fill out the Name field
         let key = "fName";
         let field = trimmedFields[key];
         if (field === null)
@@ -79,11 +77,11 @@ export default function EditProfile(props) {
         for (const [key, value] of Object.entries(fields)) {
             let field = value;
 
-            // If value is not null trim the field.
+            // If value is not null trim the field
             if (field !== null) {
                 field = field.trim();
 
-                // If the trimmed field is empty make it null.
+                // If the trimmed field is empty make it null
                 if (field.length === 0)
                     field = null;
             }
@@ -114,8 +112,9 @@ export default function EditProfile(props) {
                             value={fields.email} />
                     </div>
                     <div className="form-group verdana">
-                        <Link className="btn btn-danger btn-lg mr-5 mb-5" to="/profile">Cancel</Link>
-                        <button type="submit" className="btn btn-success btn-lg mb-5">Update</button>
+                        {/* Navigate back to profile page on Cancel */}
+                        <Link className="btn btn-danger btn-lg mr-5 mb-3" to="/profile">Cancel</Link>
+                        <button type="submit" className="btn btn-success btn-lg mb-3">Update</button>
                     </div>
                 </form>
             </div>

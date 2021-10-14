@@ -34,6 +34,7 @@ export default function SignUp(props) {
         history.push("/profile");
     };
 
+    // Used to display error messages if a user tries to use an already registered email or if their passwords don't match
     const handleValidation = async () => {
         const trimmedFields = trimFields();
         const currentErrors = {};
@@ -51,6 +52,7 @@ export default function SignUp(props) {
         setErrors(currentErrors);
 
         return { trimmedFields, isValid: Object.keys(currentErrors).length === 0 };
+        // Basic Validation code sourced from week 8 tutorial
     };
 
     const trimFields = () => {

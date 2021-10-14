@@ -10,7 +10,7 @@ export default function Posting(props) {
     // Counter used to display the number of characters in a post
     const [count, setCount] = useState(0);
 
-    // Load posts
+    // Load posts from database on every render
     useEffect(() => {
         async function loadPosts() {
             const currentPosts = await getPosts();
@@ -24,6 +24,7 @@ export default function Posting(props) {
 
     const handleInputChange = (event) => {
         setPost(event.target.value);
+
         // Update count state atfer every new character is typed out
         setCount(event.target.value.length)
     };
@@ -34,12 +35,13 @@ export default function Posting(props) {
         // Trim the post text
         const trimmedPost = post.trim();
 
+        // Return error message if a post is left empty
         if (trimmedPost === "") {
             setErrorMessage("A post cannot be empty.");
             return;
         }
 
-        // Create post
+        // Create post with user's email
         const newPost = { text: trimmedPost, email: props.user.email };
         await createPost(newPost);
 
@@ -58,7 +60,7 @@ export default function Posting(props) {
     return (
         <React.Fragment>
             <div className="container text-center verdana mb-3">
-                <h1 className="my-3 text-primary"><b>Posting Page</b></h1>
+                <h1 className="my-3 text-primary bOutline"><b>Posting Page</b></h1>
                 <p className="largePara">Welcome to the Posting Page.<br />Here you can make posts
                     to other students or see what other students have been posting about.</p>
             </div>

@@ -24,6 +24,7 @@ export default function App() {
     setUser(user);
   };
 
+  // Update state when a user edits their information
   const updateUser = (user) => {
     setUser(user);
   };
@@ -36,30 +37,30 @@ export default function App() {
 
   return (
     <div>
-      <Router> {/*Router and Switch are used to display only the specified elements on the single page.*/}
+      <Router> {/* Router and Switch are used to display only the specified elements on the single page. */}
         <Header /> {/* Navbar and Header will be displayed at all times so they aren't inside the Switch tags. */}
-        <Navbar user={user} signoutUser={signoutUser} />
+        <Navbar user={user} signoutUser={signoutUser} /> {/* User and signoutUser function is passed as props */}
         <Switch>
           <Route exact path="/"> {/* Route path for Home Page */}
             <Home user={user} />
           </Route>
           <Route path="/signup"> {/* Route path for Sign Up Page */}
-            <SignUp signinUser={signinUser} />
+            <SignUp signinUser={signinUser} /> {/* When a user signs up, they also immediately sign in to Vibe Check */}
           </Route>
           <Route path="/signin"> {/* Route path for Sign In Page */}
             <SignIn signinUser={signinUser} />
           </Route>
           <Route path="/profile"> {/* Route Path for My Profile Page */}
-            <MyProfile user={user} />
+            <MyProfile user={user} /> {/* User information is passed in as props */}
           </Route>
           <Route path="/edit/:email"> {/* Route Path for Edit Profile Page */}
             <EditProfile updateUser={updateUser} />
           </Route>
           <Route path="/posts">
-            <Posting user={user} />
+            <Posting user={user} /> {/* User information is passed in as props */}
           </Route>
         </Switch>
-        <Footer /> {/* Footer will be displayed at all times so it the footer tag is outside of the Switch tags. */}
+        <Footer /> {/* Footer will be displayed at all times so the footer tag is outside of the Switch tags. */}
       </Router>
     </div>
   );

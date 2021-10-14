@@ -20,3 +20,5 @@ module.exports = (express, app) => {
   // Add routes to server to reduce duplication
   app.use("/api/users", router);
 };
+
+// Code sourced from week 8 & 9 tutorials

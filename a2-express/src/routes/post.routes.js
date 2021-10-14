@@ -11,3 +11,5 @@ module.exports = (express, app) => {
   // Add routes to server.
   app.use("/api/posts", router);
 };
+
+// Code sourced from week 8 tutorial
