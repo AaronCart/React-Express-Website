@@ -91,9 +91,10 @@ export default function Posting(props) {
                             :
                             posts.map((p) =>
                                 // p is just short for posts
-                                <div className="border my-3 p-3 mx-5" style={{ whiteSpace: "pre-wrap" }}>
+                                <div className="border border-info bg-light my-3 p-3 mx-5" style={{ whiteSpace: "pre-wrap" }}>
                                     <h4 className="text-success">{p.email}</h4>
                                     {p.text}
+                                    <p className="text-muted right">Date Posted: {p.createdAt}</p>
                                 </div>
                             )
                     }

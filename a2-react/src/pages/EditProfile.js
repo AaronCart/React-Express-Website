@@ -99,7 +99,7 @@ export default function EditProfile(props) {
 
     return (
         <div className="container-fluid">
-            <div className="container pt-4">
+            <div className="container mt-1 pt-4 border">
                 <form onSubmit={handleSubmit} className="mx-5">
                     <h1 className="text-primary text-center mb-3"><b>Edit Profile</b></h1>
                     <div className="form-group formLabel">

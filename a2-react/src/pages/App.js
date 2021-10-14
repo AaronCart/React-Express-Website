@@ -40,19 +40,19 @@ export default function App() {
         <Header /> {/* Navbar and Header will be displayed at all times so they aren't inside the Switch tags. */}
         <Navbar user={user} signoutUser={signoutUser} />
         <Switch>
-          <Route exact path="/"> {/* Route path for Home class */}
+          <Route exact path="/"> {/* Route path for Home Page */}
             <Home user={user} />
           </Route>
-          <Route path="/signup"> {/* Route path for SignUp class */}
+          <Route path="/signup"> {/* Route path for Sign Up Page */}
             <SignUp signinUser={signinUser} />
           </Route>
-          <Route path="/signin"> {/* Route path for SignIn class */}
+          <Route path="/signin"> {/* Route path for Sign In Page */}
             <SignIn signinUser={signinUser} />
           </Route>
-          <Route path="/profile"> {/* Route Path for My Profile class */}
+          <Route path="/profile"> {/* Route Path for My Profile Page */}
             <MyProfile user={user} />
           </Route>
-          <Route path="/edit/:email">
+          <Route path="/edit/:email"> {/* Route Path for Edit Profile Page */}
             <EditProfile updateUser={updateUser} />
           </Route>
           <Route path="/posts">
