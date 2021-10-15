@@ -27,11 +27,7 @@ export default function SignUp(props) {
         // Create user
         const user = await createUser(trimmedFields);
 
-        // Set user state
-        props.signinUser(user);
-
-        // Navigate to the profile page so that the user is signed in after signing up
-        history.push("/profile");
+        alert("Congrats! You can now Sign In");
     };
 
     // Used to display error messages if a user tries to use an already registered email or if their passwords don't match

@@ -42,7 +42,7 @@ export default function Posting(props) {
         }
 
         // Create post with user's email
-        const newPost = { text: trimmedPost, email: props.user.email };
+        const newPost = { text: trimmedPost, email: props.user.email, likes: 0, dislikes: 0 };
         await createPost(newPost);
 
         // Add post to locally stored posts
@@ -95,8 +95,11 @@ export default function Posting(props) {
                                 // p is just short for posts
                                 <div className="border border-info bg-light my-3 p-3 mx-5" style={{ whiteSpace: "pre-wrap" }}>
                                     <h4 className="text-success">{p.email}</h4>
-                                    {p.text}
+                                    <b>{p.text}</b>
                                     <p className="text-muted right">Date Posted: {p.createdAt}</p>
+                                    <p>Likes: {p.likes} | Dislikes: {p.dislikes}</p>
+                                    <button className="btn btn-outline-primary mr-2">Like</button>
+                                    <button className="btn btn-outline-danger">Dislike</button>
                                 </div>
                             )
                     }

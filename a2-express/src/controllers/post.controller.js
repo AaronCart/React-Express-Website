@@ -10,7 +10,9 @@ exports.all = async (req, res) => {
 exports.create = async (req, res) => {
   const post = await db.post.create({
     text: req.body.text,
-    email: req.body.email
+    email: req.body.email,
+    likes: req.body.likes,
+    dislikes: req.body.dislikes
   });
 
   res.json(post);

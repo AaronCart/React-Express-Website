@@ -9,5 +9,11 @@ module.exports = (sequelize, DataTypes) =>
       // Sets the maximum length for a post (600 characters) as required in spec sheet
       type: DataTypes.STRING(600),
       allowNull: false
+    },
+    likes: {
+      type: DataTypes.INTEGER
+    },
+    dislikes: {
+      type: DataTypes.INTEGER
     }
   });
