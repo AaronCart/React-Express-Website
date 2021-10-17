@@ -20,7 +20,7 @@ export default function Posting(props) {
         }
 
         loadPosts();
-    }, []);
+    });
 
     const handleInputChange = (event) => {
         setPost(event.target.value);
