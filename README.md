@@ -1,3 +1,4 @@
-# Aaron Cartledge (s3840848)
-### Further Web Programming Assignment 2 Git Repository
-https://github.com/rmit-fwp-s2-2021/s3840848_A2
+# Aaron Cartledge
+### React & Express Website made during 2021 at RMIT
+##### Just React Version can be found here
+https://aaron-a1.netlify.app/
